@@ -2,12 +2,12 @@
 #define UARTCOMMUNICATIONQT_H
 
 #include <QObject>
-#include "NS_communication.h"
+#include "a_communication.h"
 #include <QSerialPort>
 #include <string>
 #include "communicationdebuger.h"
 
-class UartCommunicationQt : public NS_communication/*, QObject*/
+class UartCommunicationQt : public A_Communication/*, QObject*/
 {
 //    Q_OBJECT
 public:
