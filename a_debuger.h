@@ -32,6 +32,9 @@ public slots:
     void printError(QString error);
     void print(QString msg);
 
+signals:
+    void printedError(QString msg);
+
 private:
     QTextEdit *textEdit;
     bool autoScroll;

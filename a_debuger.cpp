@@ -75,19 +75,13 @@ void A_Debuger::printArray(QString header, QByteArray data)
 
 void A_Debuger::printError(int error)
 {
-    if(textEdit == nullptr)
-        return;
-
-    QString msg = MessageDebuger::beginError + QString::asprintf("err:%d - ", error) + getErrorString(error) + MessageDebuger::end;
-    textEdit->append(msg);
-    textEdit->append("");
-
-    if(autoScroll)
-        textEdit->moveCursor(QTextCursor::End);
+    printError(QString::asprintf("err:%d - ", error) + getErrorString(error));
 }
 
 void A_Debuger::printError(QString error)
 {
+    emit printedError(error);
+
     if(textEdit == nullptr)
         return;
     textEdit->append(MessageDebuger::beginError + error + MessageDebuger::end);
