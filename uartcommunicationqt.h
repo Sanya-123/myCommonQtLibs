@@ -25,6 +25,14 @@ public:
     void resetRxBuffer();
 
     QSerialPort* getPort();
+    void setNoBlocked(bool noBloked);
+
+private:
+    enum EventsUartCommunication{
+        ByteWritedEvent,
+        ReadyReadEvent,
+    };
+    bool waytEvent(EventsUartCommunication event, uint32_t timeout_ms);
 
 signals:
 
@@ -32,6 +40,7 @@ private:
     QSerialPort port;
     uint32_t timeout;
     CommunicationDebuger *debuger;
+    bool noBlockedWayt;
 };
 
 #endif // UARTCOMMUNICATIONQT_H

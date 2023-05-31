@@ -25,10 +25,22 @@ public:
 
     void resetRxBuffer();
 
+    void setNoBlocked(bool noBloked);
+
+private:
+    enum EventsTcpCommunication{
+        ConnectedEvent,
+        DisconnectedEvent,
+        ByteWritedEvent,
+        ReadyReadEvent,
+    };
+    bool waytEvent(enum EventsTcpCommunication event, uint32_t timeout_ms);
+
 private:
     QTcpSocket socket;
     uint32_t timeout;
     CommunicationDebuger *debuger;
+    bool noBlockedWayt;
 };
 
 #endif // TCP_COMMUNICATIONQT_H
