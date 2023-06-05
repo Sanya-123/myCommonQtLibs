@@ -27,6 +27,8 @@ public:
     QSerialPort* getPort();
     void setNoBlocked(bool noBloked);
 
+    void delay_ms(uint32_t timeDelay_ms);
+
 private:
     enum EventsUartCommunication{
         ByteWritedEvent,

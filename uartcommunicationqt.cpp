@@ -102,6 +102,16 @@ void UartCommunicationQt::setNoBlocked(bool noBloked)
     noBlockedWayt = noBloked;
 }
 
+void UartCommunicationQt::delay_ms(uint32_t timeDelay_ms)
+{
+    QTimer timerr;
+    QEventLoop eventloop;
+//    QObject::connect(&timerr, &QTimer::timeout, &eventloop, &QEventLoop::quit);
+//    timerr.start(timeout_ms);
+    timerr.singleShot(timeDelay_ms, &eventloop, &QEventLoop::quit);
+    eventloop.exec();
+}
+
 bool UartCommunicationQt::waytEvent(EventsUartCommunication event, uint32_t timeout_ms)
 {
     QTimer timerr;

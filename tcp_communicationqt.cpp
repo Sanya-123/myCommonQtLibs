@@ -116,6 +116,16 @@ void TCP_CommunicationQt::setNoBlocked(bool noBloked)
     noBlockedWayt = noBloked;
 }
 
+void TCP_CommunicationQt::delay_ms(uint32_t timeDelay_ms)
+{
+    QTimer timerr;
+    QEventLoop eventloop;
+//    QObject::connect(&timerr, &QTimer::timeout, &eventloop, &QEventLoop::quit);
+//    timerr.start(timeout_ms);
+    timerr.singleShot(timeDelay_ms, &eventloop, &QEventLoop::quit);
+    eventloop.exec();
+}
+
 bool TCP_CommunicationQt::waytEvent(EventsTcpCommunication event, uint32_t timeout_ms)
 {
     QTimer timerr;
@@ -133,7 +143,7 @@ bool TCP_CommunicationQt::waytEvent(EventsTcpCommunication event, uint32_t timeo
             break;
     }
 
-    timerr.start(timeout_ms);
+//    timerr.start(timeout_ms);
     eventloop.exec();
     bool res = timerr.isSingleShot();
 //    QObject::disconnect(&timerr, &QTimer::timeout, &eventloop, &QEventLoop::quit);

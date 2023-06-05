@@ -27,6 +27,8 @@ public:
 
     void setNoBlocked(bool noBloked);
 
+    void delay_ms(uint32_t timeDelay_ms);
+
 private:
     enum EventsTcpCommunication{
         ConnectedEvent,
