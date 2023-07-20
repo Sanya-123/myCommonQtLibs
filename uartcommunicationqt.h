@@ -6,6 +6,7 @@
 #include <QSerialPort>
 #include <string>
 #include "communicationdebuger.h"
+#include "binsemaphoreqt.h"
 
 class UartCommunicationQt : public A_Communication/*, QObject*/
 {
@@ -29,6 +30,9 @@ public:
 
     void delay_ms(uint32_t timeDelay_ms);
 
+    bool getSemaphore(uint32_t timeOut = 0xFFFFFFFF);
+    void releaseSemaphore();
+
 private:
     enum EventsUartCommunication{
         ByteWritedEvent,
@@ -43,6 +47,7 @@ private:
     uint32_t timeout;
     CommunicationDebuger *debuger;
     bool noBlockedWayt;
+    BinSemaphoreQt sem;
 };
 
 #endif // UARTCOMMUNICATIONQT_H

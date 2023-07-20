@@ -4,6 +4,7 @@
 #include <a_communication.h>
 #include <QTcpSocket>
 #include "communicationdebuger.h"
+#include "binsemaphoreqt.h"
 
 #define DEFAULT_PORT            10002
 
@@ -29,6 +30,9 @@ public:
 
     void delay_ms(uint32_t timeDelay_ms);
 
+    bool getSemaphore(uint32_t timeOut = 0xFFFFFFFF);
+    void releaseSemaphore();
+
 private:
     enum EventsTcpCommunication{
         ConnectedEvent,
@@ -43,6 +47,7 @@ private:
     uint32_t timeout;
     CommunicationDebuger *debuger;
     bool noBlockedWayt;
+    BinSemaphoreQt sem;
 };
 
 #endif // TCP_COMMUNICATIONQT_H

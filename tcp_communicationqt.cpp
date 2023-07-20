@@ -36,7 +36,9 @@ bool TCP_CommunicationQt::openPort(std::string name)
     socket.connectToHost(nameAndPort[0], port);
 
     if(socket.waitForConnected(timeout))
+    {
         return true;
+    }
 
     return false;
 
@@ -44,6 +46,7 @@ bool TCP_CommunicationQt::openPort(std::string name)
 
 void TCP_CommunicationQt::closedPort()
 {
+    releaseSemaphore();
     socket.disconnectFromHost();
     socket.close();
 }
@@ -124,6 +127,16 @@ void TCP_CommunicationQt::delay_ms(uint32_t timeDelay_ms)
 //    timerr.start(timeout_ms);
     timerr.singleShot(timeDelay_ms, &eventloop, &QEventLoop::quit);
     eventloop.exec();
+}
+
+bool TCP_CommunicationQt::getSemaphore(uint32_t timeOut)
+{
+    return sem.getSemaphore(timeOut);
+}
+
+void TCP_CommunicationQt::releaseSemaphore()
+{
+    sem.realeseSemaphore();
 }
 
 bool TCP_CommunicationQt::waytEvent(EventsTcpCommunication event, uint32_t timeout_ms)

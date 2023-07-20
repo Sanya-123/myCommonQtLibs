@@ -25,6 +25,7 @@ bool UartCommunicationQt::openPort(std::string name)
 
 void UartCommunicationQt::closedPort()
 {
+    releaseSemaphore();
     port.close();
 }
 
@@ -110,6 +111,16 @@ void UartCommunicationQt::delay_ms(uint32_t timeDelay_ms)
 //    timerr.start(timeout_ms);
     timerr.singleShot(timeDelay_ms, &eventloop, &QEventLoop::quit);
     eventloop.exec();
+}
+
+bool UartCommunicationQt::getSemaphore(uint32_t timeOut)
+{
+    return sem.getSemaphore(timeOut);
+}
+
+void UartCommunicationQt::releaseSemaphore()
+{
+    sem.realeseSemaphore();
 }
 
 bool UartCommunicationQt::waytEvent(EventsUartCommunication event, uint32_t timeout_ms)
